@@ -1,0 +1,114 @@
+{% extends 'Base.html' %}
+{% block content %}
+<head>
+    <title>Add Training</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        
+        h2 {
+            text-align: center;
+            color: #333;
+            padding-top: 20px;
+        }
+
+        form {
+            width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: bold;
+            width: 150px;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        input, textarea {
+            width: calc(100% - 170px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #d2b5f8;
+            color: black;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #a662ff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h2>Add Training</h2>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="form-row">
+            <label>Title:</label>
+            <input type="text" name="title" required>
+        </div>
+
+        <div class="form-row">
+            <label>Description:</label>
+            <textarea name="description" required></textarea>
+        </div>
+
+        <div class="form-row">
+            <label>Trainer Name:</label>
+            <input type="text" name="trainer_name" required>
+        </div>
+
+        <div class="form-row">
+            <label>Training Start Date:</label>
+            <input type="date" name="date" required>
+        </div>
+
+        <div class="form-row">
+            <label>Duration<sub >(Mins)</sub>:</label>
+            <input type="text" name="duration" required>
+        </div>
+
+        <div class="form-row">
+            <label>Price:</label>
+            <input type="number" name="price" step="0.01" required>
+        </div>
+
+        <button type="submit">Save Training</button>
+    </form>
+</body>
+{% endblock %}

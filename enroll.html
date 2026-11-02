@@ -1,0 +1,144 @@
+{% extends 'Base.html' %}
+{% block content %}
+<head>
+    <title>Enroll in Training</title>
+    <style>
+        .body-container {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: auto;
+            flex-direction: column;
+            padding-bottom: 30px;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            margin-top: 10%;
+            margin-left: 28%;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #c09bf0;
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 600;
+        }
+
+        .form-container button:hover {
+            background-color: #a662ff;
+            color: white;
+        }
+
+        /* Enrolled Trainings Table */
+        .enrolled-container {
+            margin-top: 30px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .enrolled-container h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .enrolled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .enrolled-table th, .enrolled-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .enrolled-table th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="body-container">
+    <div class="form-container">
+        <h2>Enroll in Training</h2>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="training">Select Training:</label>
+                <select name="training" id="training" required>
+                    {% for training in trainings %}
+                        <option value="{{ training.id }}">{{ training.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button type="submit">Enroll</button>
+        </form>
+    </div>
+{% endblock %}

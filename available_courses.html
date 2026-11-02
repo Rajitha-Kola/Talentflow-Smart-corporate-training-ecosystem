@@ -1,0 +1,45 @@
+{% extends 'Base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="text-center" style="margin-top: 4%;">Available Courses</h2>
+
+    <table class="table table-bordered table-hover mt-4 table_width">
+        <thead class="table-dark">
+            <tr>
+                <th>Course Name</th>
+                <th>Description</th>
+                <th>Trainer</th>
+                <th>Training Begins</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in courses %}
+            <tr>
+                <td>{{ course.title }}</td>
+                <td >{{ course.description }}</td>
+                <td style="width:230px">{{ course.trainer_name }}</td>
+                <td style="width:150px">{{ course.date }}</td>
+                <td>
+                    <a href="{% url 'enroll_user' pk=course.id %}" 
+                       class="btn btn-primary btn-sm enroll-btn" 
+                       data-course="{{ course.title }}">Enroll</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" class="text-center">No courses available at the moment.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Alert Notification -->
+<div id="alert-box" class="alert alert-success text-center" style="position: fixed; top: 85%; left: 50%; transform: translateX(-50%); z-index: 1000; width: 300px; box-shadow: 0px 4px 6px rgba(0,0,0,0.1);">
+    {% for message in messages %}{{message}}{% endfor %} <span id="course-name"></span>!
+</div>  
+
+
+{% endblock %}
